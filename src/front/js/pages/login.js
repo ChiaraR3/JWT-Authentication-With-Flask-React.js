@@ -5,8 +5,13 @@ import "../../styles/home.scss";
 
 export const Login = () => {
 	const { store, actions } = useContext(Context);
-	const login = async (username, password) => {
-		const resp = await fetch(`https://your_api.com/token`, {
+	const handlelogin = ()=>{
+		let email= document.getElementById("InputEmail").value;
+		let password= document.getElementById("InputPassword").value;
+		let data = login(email,password);
+	}
+	const login = async (email, password) => {
+		const resp = await fetch("https://3001-amethyst-beaver-dk04lqtb.ws-eu16.gitpod.io/api/login",
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ username: "joe", password: "1234" })
