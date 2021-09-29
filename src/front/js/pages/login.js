@@ -1,20 +1,19 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.scss";
 
 export const Login = () => {
 	const { store, actions } = useContext(Context);
-	const handlelogin = ()=>{
-		let email= document.getElementById("InputEmail").value;
-		let password= document.getElementById("InputPassword").value;
-		let data = login(email,password);
-	}
+	const handlelogin = () => {
+		let email = document.getElementById("InputEmail").value;
+		let password = document.getElementById("InputPassword").value;
+		let data = login(email, password);
+	};
 	const login = async (email, password) => {
-		const resp = await fetch("https://3001-amethyst-beaver-dk04lqtb.ws-eu16.gitpod.io/api/login",
+		const resp = await fetch("https://3001-amethyst-beaver-dk04lqtb.ws-eu16.gitpod.io/api/login", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ username: "joe", password: "1234" })
+			body: JSON.stringify({ email: email, password: password })
 		});
 
 		if (!resp.ok) throw Error("There was a problem in the login request");
@@ -47,7 +46,7 @@ export const Login = () => {
 				</small>
 			</div>
 			<div className="form-group">
-				<label ohtmlFor="exampleInputPassword1">Password</label>
+				<label htmlFor="exampleInputPassword1">Password</label>
 				<input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
 			</div>
 			<div className="form-check">
@@ -56,7 +55,12 @@ export const Login = () => {
 					Check me out
 				</label>
 			</div>
-			<button type="submit" className="btn btn-primary">
+			<button
+				type="submit"
+				className="btn btn-primary"
+				onClick={() => {
+					signup(email, password);
+				}}>
 				Submit
 			</button>
 		</form>
